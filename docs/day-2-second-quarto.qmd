@@ -36,7 +36,8 @@ mc_dates <- mack_verts$sampledate
 
 
 ```{r}
-mc_salamanders <- mack_verts
+mc_salamanders <- mack_verts |>
+  filter(species == "DITE")
 ```
 
 ```{r}
@@ -52,3 +53,24 @@ plot_salamander
 ```{r}
 ggsave(plot = plot_salamander, here::here("figs", "salamander_size.png"))
 ```
+```{r}
+mc_trout <- mack_verts |> 
+  filter(species == "ONCL")
+```
+
+```{r}
+unique(mc_trout$reach)
+
+
+```
+
+```{r}
+custom_colors <- c("L" = "cyan", "M" = "yellow", "U" = "purple") 
+
+ggplot(data = mc_trout, aes(x = length1, y = weight)) +
+  geom_point(aes(color = reach)) +
+  scale_color_manual(values = custom_colors) 
+  facet_wrap(~reach) + 
+  theme_minimal()
+```
+
