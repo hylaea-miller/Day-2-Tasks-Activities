@@ -5,6 +5,50 @@ editor: visual
 ---
 
 ```{r}
-
+mack_verts <- read.csv(here::here("data", "AS00601.csv"))
 ```
 
+
+```{r}
+mack_verts <- clean_names(mack_verts)
+```
+
+```{r}
+mack_verts$weight 
+
+variable <- mack_verts$weight
+
+mc_wt_5 <- variable[5]
+mc_wt_5
+```
+
+```{r}
+mc_length_8_20 <- mack_verts[c(8:20),"length1"]
+mc_length_8_20
+```
+```{r}
+mc_dates <- mack_verts[,'sampledate']
+```
+
+```{r}
+mc_dates <- mack_verts$sampledate
+```
+
+
+```{r}
+mc_salamanders <- mack_verts
+```
+
+```{r}
+plot_salamander <- ggplot(data = mc_salamanders,
+                          aes(x = length1, y = weight)) + 
+  geom_point(alpha = 0.5, color = "orange") +
+  theme_minimal()
+
+plot_salamander
+ 
+
+```
+```{r}
+ggsave(plot = plot_salamander, here::here("figs", "salamander_size.png"))
+```
